@@ -1,0 +1,3 @@
+[submodule "QuickChick"]
+	path = QuickChick
+	url = git://github.com/QuickChick/QuickChick.git
