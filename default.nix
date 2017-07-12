@@ -37,20 +37,15 @@ in {
     buildInputs = stdenv.lib.attrValues dsss17 ++ [
       ocaml ocamlPackages.camlp5_transitional
       coq_8_6
-      coqPackages_8_6.autosubst
       coqPackages_8_6.dpdgraph
-      coqPackages_8_6.flocq
-      coqPackages_8_6.heq
       coqPackages_8_6.mathcomp
       coqPackages_8_6.ssreflect
       (withPatches [./QuickChick.patch]
          (withSrc ./QuickChick coqPackages_8_6.QuickChick))
       # (withSrc ~/oss/vellvm vellvm-dsss)
       coqPackages_8_6.coq-ext-lib
-      coqPackages_8_6.coquelicot
       coqPackages_8_6.paco
       compcert ocamlPackages.menhir
-        ghc cabal-install alex happy
     ];
   };
 }
