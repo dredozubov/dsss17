@@ -46,6 +46,8 @@ in {
       coqPackages_8_6.coq-ext-lib
       coqPackages_8_6.paco
       compcert ocamlPackages.menhir
+      vim
+      emacs emacsPackages.proofgeneral_HEAD
     ];
   };
 }
