@@ -48,6 +48,9 @@ in {
          }))
       coqPackages_8_6.coq-ext-lib
       (callPackage ./paco.nix {})
+      (callPackage ./metalib.nix {
+         haskellPackages = haskellPkgs // haskellDeps;
+       })
       compcert ocamlPackages.menhir
       vim
       emacs emacsPackages.proofgeneral_HEAD
