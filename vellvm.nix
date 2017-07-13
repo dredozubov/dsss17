@@ -25,6 +25,11 @@ stdenv.mkDerivation {
     (cd src; make)
   '';
 
+  installPhase = ''
+    mkdir -p $out/bin
+    cp src/vellvm $out/bin/vellvm
+  '';
+
   meta = with stdenv.lib; {
     homepage = https://www.cis.upenn.edu/~stevez/vellvm/;
     license = licenses.gpl3;
