@@ -32,26 +32,44 @@ in {
   dsss17Env = with pkgs; with dsss17; pkgs.myEnvFun {
     name = "dsss17";
     buildInputs = stdenv.lib.attrValues dsss17 ++ [
-      ocaml ocamlPackages.camlp5_transitional
+      # Coq
+      ocaml
+      ocamlPackages.camlp5_transitional
       coq_8_6
       coqPackages_8_6.dpdgraph
+      coqPackages_8_6.coq-ext-lib
+
+      # ssreflect
       coqPackages_8_6.mathcomp
       coqPackages_8_6.ssreflect
+
+      # QuickChick
       (withPatches [./QuickChick.patch]
          (withSrc ./QuickChick (callPackage ./QuickChick.nix {})))
+
+      # Vellvm
+      (callPackage ./paco.nix {})
       (withSrc ./vellvm (callPackage ./vellvm.nix {
            paco = callPackage ./paco.nix {};
          }))
-      coqPackages_8_6.coq-ext-lib
-      (callPackage ./paco.nix {})
+
+      # Ott
+      ott
+
+      # Compcert
+      compcert ocamlPackages.menhir
+
+      # lngen
+      haskellDeps.lngen
+
+      # Metalib
       (callPackage ./metalib.nix {
          haskellPackages = haskellPkgs // haskellDeps;
        })
-      compcert ocamlPackages.menhir
+
+      # Editors
       vim
       emacs emacsPackages.proofgeneral_HEAD
-      ott
-      haskellDeps.lngen
     ];
   };
 }
