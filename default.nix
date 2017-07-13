@@ -43,9 +43,8 @@ in {
       coqPackages_8_6.ssreflect
       (withPatches [./QuickChick.patch]
          (withSrc ./QuickChick (callPackage ./QuickChick.nix {})))
-      # (withSrc ~/oss/vellvm vellvm-dsss)
+      (withSrc ./vellvm (callPackage ./vellvm.nix {}))
       coqPackages_8_6.coq-ext-lib
-      # coqPackages_8_6.paco
       (callPackage ./paco.nix {})
       compcert ocamlPackages.menhir
       vim
