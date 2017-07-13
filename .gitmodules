@@ -4,3 +4,6 @@
 [submodule "vellvm"]
 	path = vellvm
 	url = git://github.com/vellvm/vellvm.git
+[submodule "metalib"]
+	path = metalib
+	url = git://github.com/plclub/metalib.git
