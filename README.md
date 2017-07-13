@@ -8,6 +8,6 @@ nix-build
 ./result/bin/load-env-dsss17
 ```
 
-You will now be in a shell that has every dependeny installed. You could start
+You will now be in a shell that has every dependency installed. You could start
 Emacs or vi from this shell, for example, and it should then see all those
 dependencies.
