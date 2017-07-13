@@ -7,3 +7,6 @@
 [submodule "metalib"]
 	path = metalib
 	url = git://github.com/plclub/metalib.git
+[submodule "lngen"]
+	path = lngen
+	url = git://github.com/plclub/lngen.git
