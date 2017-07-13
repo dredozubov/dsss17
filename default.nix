@@ -16,9 +16,6 @@ let
   dsss17 = {
   };
 
-  haskellDeps = pkgs.recurseIntoAttrs rec {
-  };
-
   withSrc = path: deriv: pkgs.stdenv.lib.overrideDerivation deriv (attrs: {
     src = path;
   });
@@ -26,6 +23,10 @@ let
   withPatches = patches: deriv: pkgs.stdenv.lib.overrideDerivation deriv (attrs: {
     patches = patches;
   });
+
+  haskellDeps = pkgs.recurseIntoAttrs rec {
+    lngen = withSrc ./lngen (callPackage ./lngen.nix {});
+  };
 
 in {
   dsss17 = dsss17;
@@ -41,15 +42,16 @@ in {
       coqPackages_8_6.mathcomp
       coqPackages_8_6.ssreflect
       (withPatches [./QuickChick.patch]
-         (withSrc ./QuickChick coqPackages_8_6.QuickChick))
+         (withSrc ./QuickChick (callPackage ./QuickChick.nix {})))
       # (withSrc ~/oss/vellvm vellvm-dsss)
       coqPackages_8_6.coq-ext-lib
-      coqPackages_8_6.paco
+      # coqPackages_8_6.paco
+      (callPackage ./paco.nix {})
       compcert ocamlPackages.menhir
       vim
       emacs emacsPackages.proofgeneral_HEAD
       ott
-      haskellPkgs.lngen
+      haskellDeps.lngen
     ];
   };
 }
