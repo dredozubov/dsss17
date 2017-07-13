@@ -48,6 +48,8 @@ in {
       compcert ocamlPackages.menhir
       vim
       emacs emacsPackages.proofgeneral_HEAD
+      ott
+      haskellPkgs.lngen
     ];
   };
 }
