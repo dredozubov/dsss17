@@ -1,4 +1,4 @@
-{ stdenv, fetchgit, coq, coqPackages, ocamlPackages, which, unzip
+{ stdenv, fetchgit, coq, paco, ocamlPackages, which, unzip
 , tools ? stdenv.cc
 }:
 
@@ -17,7 +17,7 @@ stdenv.mkDerivation {
   enableParallelBuilding = true;
 
   configurePhase = ''
-    (cd lib; unzip ${coqPackages.paco.src})
+    (cd lib; unzip ${paco.src})
   '';
 
   buildPhase = ''
