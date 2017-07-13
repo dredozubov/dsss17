@@ -29,11 +29,7 @@ let
   };
 
 in {
-  dsss17 = dsss17;
-  deps   = haskellDeps;
-  pkgs   = haskellPkgs;
-
-  dsss17Env = with pkgs; with haskellPkgs; with dsss17; pkgs.myEnvFun {
+  dsss17Env = with pkgs; with dsss17; pkgs.myEnvFun {
     name = "dsss17";
     buildInputs = stdenv.lib.attrValues dsss17 ++ [
       ocaml ocamlPackages.camlp5_transitional
