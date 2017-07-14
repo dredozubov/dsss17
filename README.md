@@ -1,7 +1,11 @@
 # DeepSpec Summer School 2017
 
 To build all the dependencies needed for the DeepSpec Summer School 2017, you
-have several options, listed below.
+have several options, listed below.  If you just want the quick path:
+
+- Using Docker: `make pull run`
+- As a local Nix environment: `make nix shell`
+- Installed into your Nix user environment: `make install`
 
 ## Running from a Docker image
 
