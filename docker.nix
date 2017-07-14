@@ -14,6 +14,15 @@ dockerTools.buildImage {
     #!${stdenv.shell}
     ${dockerTools.shadowSetup}
     mkdir /root
+    mkdir /root/emacs.d
+    cat > ~/root/emacs.d/init.el <<EOF
+(dolist (path '("/share/emacs/site-lisp/ProofGeneral/generic"
+                "/share/emacs/site-lisp/ProofGeneral/lib"
+                "/share/emacs/site-lisp/ProofGeneral/coq"))
+  (add-to-list 'load-path path))
+
+(load "proof-site")
+EOF
   '';
 
   contents = [ 
