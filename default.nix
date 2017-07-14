@@ -71,7 +71,11 @@ let
 
     # Editors
     vim
-    emacs emacsPackages.proofgeneral_HEAD
+    emacs
+      emacsPackages.proofgeneral_HEAD
+      emacsPackagesNg.use-package
+      emacsPackagesNg.company-coq
+      emacsPackagesNg.tuareg
   ];
 
   build = with pkgs; pkgs.buildEnv {
