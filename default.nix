@@ -41,6 +41,7 @@ let
 
 in {
   dsss17 = dsss17;
+
   dsss17Env = with pkgs; pkgs.myEnvFun {
     name = "dsss17";
     buildInputs = stdenv.lib.attrValues dsss17 ++ [
