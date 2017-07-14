@@ -18,9 +18,20 @@ dockerTools.buildImage {
 
   contents = [ 
     dsss17.options.build 
-    coreutils
+
     bash
+    coreutils
+    findutils
+    gnugrep
+    gnused
+    gnutar
+    less
+    time
+    tmux
+    watch
     which
+    xz
+    zsh
   ];
 
   config = {
