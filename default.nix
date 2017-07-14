@@ -14,6 +14,17 @@ let
     (pkgs // haskellPkgs // haskellDeps // dsss17);
 
   dsss17 = {
+    QuickChick = withPatches [./QuickChick.patch]
+      (withSrc ./QuickChick (callPackage ./QuickChick.nix {}));
+
+    paco = callPackage ./paco.nix {};
+    vellvm = withSrc ./vellvm (callPackage ./vellvm.nix {
+      paco = callPackage ./paco.nix {};
+    });
+
+    metalib = callPackage ./metalib.nix {
+      haskellPackages = haskellPkgs // haskellDeps;
+    };
   };
 
   withSrc = path: deriv: pkgs.stdenv.lib.overrideDerivation deriv (attrs: {
@@ -29,7 +40,8 @@ let
   };
 
 in {
-  dsss17Env = with pkgs; with dsss17; pkgs.myEnvFun {
+  dsss17 = dsss17;
+  dsss17Env = with pkgs; pkgs.myEnvFun {
     name = "dsss17";
     buildInputs = stdenv.lib.attrValues dsss17 ++ [
       # Coq
@@ -44,14 +56,11 @@ in {
       coqPackages_8_6.ssreflect
 
       # QuickChick
-      (withPatches [./QuickChick.patch]
-         (withSrc ./QuickChick (callPackage ./QuickChick.nix {})))
+      dsss17.QuickChick
 
       # Vellvm
-      (callPackage ./paco.nix {})
-      (withSrc ./vellvm (callPackage ./vellvm.nix {
-           paco = callPackage ./paco.nix {};
-         }))
+      dsss17.paco
+      dsss17.vellvm
 
       # Ott
       ott
@@ -63,9 +72,7 @@ in {
       haskellDeps.lngen
 
       # Metalib
-      (callPackage ./metalib.nix {
-         haskellPackages = haskellPkgs // haskellDeps;
-       })
+      dsss17.metalib
 
       # Editors
       vim
