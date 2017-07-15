@@ -76,6 +76,7 @@ let
       emacsPackagesNg.use-package
       emacsPackagesNg.company-coq
       emacsPackagesNg.tuareg
+      emacsPackagesNg.dash
   ];
 
   build = with pkgs; pkgs.buildEnv {
