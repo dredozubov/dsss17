@@ -28,6 +28,24 @@ This ensures any work you do in the `/home/nix/work` directory in the
 container (the default starting location), is saved in the `./work` directory
 where you started the container.
 
+### Committing changes to the image
+
+The Docker image provided above runs Ubuntu 16.04, and you're free to install
+new software into it using either `apt-get` or `nix-env`. In order to ensure
+these changes persist after the container is stopped, be sure to "commit" your
+container as a new image:
+
+    docker ps    # noting the container id...
+    docker commit <container_id> jwiegley/dsss17:custom
+    
+Now when you run `docker images`, you'll see both the `latest` tag and your
+new `custom` tag. You can start from this custom image in future with:
+
+    docker run -v $PWD/work:/home/nix/work -ti jwiegley/dsss17:custom
+    
+As mentioned above, anything you do in the `work` directory is always saved on
+your host machine, and does not need to be committed by Docker.
+
 ## Building a separate Nix environment
 
 The default build creates a script, `load-env-dsss17`, which, when executed,
