@@ -10,3 +10,6 @@
 [submodule "lngen"]
 	path = lngen
 	url = git://github.com/plclub/lngen.git
+[submodule "work/pierce"]
+	path = work/pierce
+	url = https://github.com/DeepSpec/dsss17.git
