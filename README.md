@@ -118,3 +118,20 @@ Error: _assignFirst found no valid variant!
 /nix/store/nbf1mkx942cy1kcvkzbvi0dkcvdbq9bc-multiple-outputs.sh: line 13: : bad substitution
 env-dsss17 loaded
 ```
+
+If you did not use `git clone --recursive` to get this repository,
+then you will need to fetch the submodules.
+
+```
+git submodule update --init
+```
+
+If you need to update a specific submodule, then you can call `git
+pull` from the submodule's directory.
+
+If you just want to update all of the submodules then this command
+will work:
+
+```
+git submodule foreach git pull
+```
