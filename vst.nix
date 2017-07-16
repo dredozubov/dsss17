@@ -42,7 +42,7 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/bin
-    cp compcert/clightgen $out/bin/clightgen
+    #cp compcert/clightgen $out/bin/clightgen
     export COQLIB=$out/lib/coq/${coq.coq-version}/user-contrib/VST
     mkdir -p $COQLIB
     cp -pR floyd msl sepcomp veric version.* $COQLIB
