@@ -69,6 +69,10 @@ COPY ./metalib.nix /home/nix/dsss17/metalib.nix
 RUN . ~/.nix-profile/etc/profile.d/nix.sh && \
     nix-build . --no-out-link -A options.dependencies.metalib
 
+COPY ./vst.nix /home/nix/dsss17/vst.nix
+RUN . ~/.nix-profile/etc/profile.d/nix.sh && \
+    nix-build . --no-out-link -A options.dependencies.vst
+
 COPY ./config.nix /home/nix/.config/nixpkgs/config.nix
 COPY ./bashrc /home/nix/.bashrc
 COPY ./init.el /home/nix/.emacs.d/init.el
