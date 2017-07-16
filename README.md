@@ -1,5 +1,9 @@
 # DeepSpec Summer School 2017
 
+Before you start, make sure you `git clone --recursive
+https://github.com/jwiegley/dsss17` this repo to get all of the
+submodules.
+
 To build all the dependencies needed for the DeepSpec Summer School 2017, you
 have several options, listed below.  If you just want the quick path:
 
@@ -60,6 +64,8 @@ execute the following from a recursive clone of this repository:
 Note: if you have forgotten to clone using `--recursive` you can fetch the submodules with
 
     git submodule update --init
+
+YOU WILL NEED THE SUBMODULES.
 
 You should now be in a shell with all the dependencies available. However,
 some of these dependencies will not be immediately visible to, for example,
