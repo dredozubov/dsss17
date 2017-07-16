@@ -36,6 +36,8 @@ let
     metalib = callPackage ./metalib.nix {
       haskellPackages = haskellPkgs // haskellDeps;
     };
+
+    vst = callPackage ./vst.nix {};
   };
 
   software = with pkgs; [
@@ -68,6 +70,9 @@ let
 
     # Metalib
     dependencies.metalib
+
+    # VST
+    dependencies.vst
 
     # Editors
     vim
