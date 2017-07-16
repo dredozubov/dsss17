@@ -57,6 +57,10 @@ execute the following from a recursive clone of this repository:
     nix-build
     ./result/bin/load-env-dsss17
 
+Note: if you have forgotten to clone using `--recursive` you can fetch the submodules with
+
+    git submodule update --init
+
 You should now be in a shell with all the dependencies available. However,
 some of these dependencies will not be immediately visible to, for example,
 Emacs. Figuring out the correct way to invoke `proof-site.el` to load Proof
