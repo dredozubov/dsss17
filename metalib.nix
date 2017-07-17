@@ -20,6 +20,7 @@ stdenv.mkDerivation {
   '';
 
   installPhase = ''
+    mkdir -p $out/lib/coq/${coq.coq-version}/Metalib
     (cd Metalib; make -f CoqSrc.mk COQLIB=$out/lib/coq/${coq.coq-version}/Metalib install)
   '';
 
