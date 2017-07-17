@@ -18,7 +18,7 @@ stdenv.mkDerivation rec {
 
   enableParallelBuilding = true;
 
-  installFlags = "COQLIB=$(out)/lib/coq/${coq.coq-version}/";
+  installFlags = "COQLIB=$(out)/lib/coq/${coq.coq-version}/QuickChick";
 
   meta = with stdenv.lib; {
     homepage = git://github.com/QuickChick/QuickChick.git;
