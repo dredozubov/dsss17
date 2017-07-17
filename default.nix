@@ -25,6 +25,8 @@ let
   };
 
   dependencies = rec {
+    compcert = callPackage ./compcert.nix {};
+
     QuickChick = withPatches [./QuickChick.patch]
       (withSrc ./QuickChick (callPackage ./QuickChick.nix {}));
 
@@ -63,7 +65,7 @@ let
     ott
 
     # Compcert
-    compcert ocamlPackages.menhir
+    dependencies.compcert ocamlPackages.menhir
 
     # lngen
     haskellDeps.lngen
