@@ -20,3 +20,8 @@ build:
 
 push: build
 	docker push jwiegley/dsss17
+
+pierce: nix
+	for d in SF/lf SF/vfa compiler vminus Stlc; do \
+	  ./result/bin/load-env-dsss17 make -C work/pierce/$$d; \
+	done
