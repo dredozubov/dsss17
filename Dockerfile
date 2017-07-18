@@ -54,6 +54,11 @@ COPY ./vellvm.nix /home/nix/dsss17/vellvm.nix
 RUN . ~/.nix-profile/etc/profile.d/nix.sh && \
     nix-build . --no-out-link -A options.dependencies.vellvm
 
+COPY ./compcert.nix /home/nix/dsss17/compcert.nix
+
+RUN . ~/.nix-profile/etc/profile.d/nix.sh && \
+    nix-build . --no-out-link -A options.dependencies.compcert
+
 COPY ./QuickChick /home/nix/dsss17/QuickChick
 COPY ./QuickChick.nix /home/nix/dsss17/QuickChick.nix
 COPY ./QuickChick.patch /home/nix/dsss17/QuickChick.patch
