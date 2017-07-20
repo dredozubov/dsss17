@@ -10,3 +10,6 @@
 [submodule "lngen"]
 	path = lngen
 	url = git://github.com/plclub/lngen.git
+[submodule "VST"]
+	path = VST
+	url = https://github.com/PrincetonUniversity/VST.git

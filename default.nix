@@ -10,22 +10,7 @@ let
   inherit (pkgs) stdenv;
   inherit (pkgs.haskell.lib) dontCheck dontHaddock;
 
-  callPackage = stdenv.lib.callPackageWith
-    (pkgs // haskellPkgs // haskellDeps // dsss17);
-
-  dsss17 = {
-    QuickChick = withPatches [./QuickChick.patch]
-      (withSrc ./QuickChick (callPackage ./QuickChick.nix {}));
-
-    paco = callPackage ./paco.nix {};
-    vellvm = withSrc ./vellvm (callPackage ./vellvm.nix {
-      paco = callPackage ./paco.nix {};
-    });
-
-    metalib = callPackage ./metalib.nix {
-      haskellPackages = haskellPkgs // haskellDeps;
-    };
-  };
+  callPackage = stdenv.lib.callPackageWith (pkgs // haskellPkgs // haskellDeps);
 
   withSrc = path: deriv: pkgs.stdenv.lib.overrideDerivation deriv (attrs: {
     src = path;
@@ -39,45 +24,81 @@ let
     lngen = withSrc ./lngen (callPackage ./lngen.nix {});
   };
 
-in {
-  dsss17 = dsss17;
+  dependencies = rec {
+    compcert = callPackage ./compcert.nix {};
 
-  dsss17Env = with pkgs; pkgs.myEnvFun {
+    QuickChick = withPatches [./QuickChick.patch]
+      (withSrc ./QuickChick (callPackage ./QuickChick.nix {}));
+
+    paco = callPackage ./paco.nix {};
+    vellvm = withSrc ./vellvm (callPackage ./vellvm.nix {
+      paco = callPackage ./paco.nix {};
+    });
+
+    metalib = callPackage ./metalib.nix {
+      haskellPackages = haskellPkgs // haskellDeps;
+    };
+
+    vst = callPackage ./vst.nix {};
+  };
+
+  software = with pkgs; [
+    # Coq
+    ocaml
+    ocamlPackages.camlp5_transitional
+    coq_8_6
+    coqPackages_8_6.dpdgraph
+    coqPackages_8_6.coq-ext-lib
+
+    # ssreflect
+    # coqPackages_8_6.mathcomp
+    coqPackages_8_6.ssreflect
+
+    # QuickChick
+    dependencies.QuickChick
+
+    # Vellvm
+    dependencies.paco
+    dependencies.vellvm
+
+    # Ott
+    ott
+
+    # Compcert
+    dependencies.compcert ocamlPackages.menhir
+
+    # lngen
+    haskellDeps.lngen
+
+    # Metalib
+    dependencies.metalib
+
+    # VST
+    dependencies.vst
+
+    # Editors
+    vim
+    emacs
+      emacsPackages.proofgeneral_HEAD
+      emacsPackagesNg.use-package
+      emacsPackagesNg.company-coq
+      emacsPackagesNg.tuareg
+      emacsPackagesNg.dash
+  ];
+
+  build = with pkgs; pkgs.buildEnv {
     name = "dsss17";
-    buildInputs = stdenv.lib.attrValues dsss17 ++ [
-      # Coq
-      ocaml
-      ocamlPackages.camlp5_transitional
-      coq_8_6
-      coqPackages_8_6.dpdgraph
-      coqPackages_8_6.coq-ext-lib
+    paths = software;
+  };
 
-      # ssreflect
-      coqPackages_8_6.mathcomp
-      coqPackages_8_6.ssreflect
+in rec {
+  env = with pkgs; pkgs.myEnvFun {
+    name = "dsss17";
+    buildInputs = software;
+  };
 
-      # QuickChick
-      dsss17.QuickChick
-
-      # Vellvm
-      dsss17.paco
-      dsss17.vellvm
-
-      # Ott
-      ott
-
-      # Compcert
-      compcert ocamlPackages.menhir
-
-      # lngen
-      haskellDeps.lngen
-
-      # Metalib
-      dsss17.metalib
-
-      # Editors
-      vim
-      emacs emacsPackages.proofgeneral_HEAD
-    ];
+  options = {
+    dependencies = dependencies;
+    build = build;
   };
 }

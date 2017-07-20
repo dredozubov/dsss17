@@ -20,7 +20,7 @@ stdenv.mkDerivation {
   '';
 
   installPhase = ''
-    (cd Metalib; make -f CoqSrc.mk COQLIB=$out/lib/coq/${coq.coq-version}/ install)
+    (cd Metalib; make -f CoqSrc.mk DSTROOT=/ COQLIB=$out/lib/coq/${coq.coq-version}/ install)
   '';
 
   meta = with stdenv.lib; {
