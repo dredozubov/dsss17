@@ -1,8 +1,14 @@
 # DeepSpec Summer School 2017
 
-Before you start, make sure you `git clone --recursive
-https://github.com/jwiegley/dsss17` this repo to get all of the
-submodules.
+
+To build all the dependencies needed for the DeepSpec Summer School
+2017, you will need to execute the following from a recursive clone of
+this repository.
+
+Note that in order to get a recursive clone of the repository you may run:
+
+    git clone git@github.com:jwiegley/dsss17.git --recursive
+    cd dsss17
 
 To build all the dependencies needed for the DeepSpec Summer School 2017, you
 have several options, listed below.  If you just want the quick path:
@@ -119,6 +125,7 @@ Error: _assignFirst found no valid variant!
 env-dsss17 loaded
 ```
 
+
 If you did not use `git clone --recursive` to get this repository,
 then you will need to fetch the submodules.
 
@@ -135,3 +142,4 @@ will work:
 ```
 git submodule foreach git pull
 ```
+
