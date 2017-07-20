@@ -25,3 +25,8 @@ pierce: nix
 	for d in SF/lf SF/vfa compiler vminus Stlc; do \
 	  ./result/bin/load-env-dsss17 make -C work/pierce/$$d; \
 	done
+
+update:
+	git submodule update --init --recursive
+	git submodule foreach --recursive git fetch
+	
