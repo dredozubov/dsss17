@@ -29,4 +29,3 @@ pierce: nix
 update:
 	git submodule update --init --recursive
 	git submodule foreach --recursive git fetch
-	
