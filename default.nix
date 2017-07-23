@@ -65,7 +65,9 @@ let
     ott
 
     # Compcert
-    dependencies.compcert ocamlPackages.menhir
+    dependencies.compcert 
+    ocamlPackages.menhir
+    ocamlPackages.findlib
 
     # lngen
     haskellDeps.lngen
