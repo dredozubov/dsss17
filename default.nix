@@ -25,7 +25,7 @@ let
   };
 
   dependencies = rec {
-    coqrel = callPackage ./coqrel.nix {};
+    certikos = callPackage ./certikos.nix {};
 
     compcert = callPackage ./compcert.nix {};
 
@@ -70,6 +70,9 @@ let
     dependencies.compcert
     ocamlPackages.menhir
     ocamlPackages.findlib
+
+    # certikos
+    dependencies.certikos
 
     # lngen
     haskellDeps.lngen
